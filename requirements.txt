@@ -1,0 +1,16 @@
+jupyterlab
+pandas
+nbclient
+GoogleNews
+gnewsclient
+snscrape
+rake_nltk
+geopy
+pgeocode
+pretty-html-table
+pyshorteners
+gunicorn
+matplotlib
+cryptography
+flask
+gspread

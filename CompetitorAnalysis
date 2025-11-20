@@ -1,0 +1,45 @@
+import smtplib
+import schedule
+import time
+import pandas as pd
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+
+# Function to send the Excel file via email
+def send_email():
+    # Email configuration
+    sender_email = 'your_email@gmail.com'
+    sender_password = 'your_email_password'
+    receiver_email = 'recipient_email@gmail.com'
+
+    # Create message
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+    msg['Subject'] = 'Weekly Excel Report'
+
+    # Attach Excel file
+    file_path = 'path/to/your/excel_file.xlsx'
+    attachment = open(file_path, 'rb')
+    excel_attachment = MIMEApplication(attachment.read(), _subtype="xlsx")
+    attachment.close()
+
+    excel_attachment.add_header('Content-Disposition', f'attachment; filename={file_path}')
+    msg.attach(excel_attachment)
+
+    # Connect to SMTP server and send email
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.send_message(msg)
+
+    print(f"Email sent at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+# Schedule the task to run every week
+schedule.every().week.at("08:00").do(send_email)  # Adjust the time as per your requirement
+
+# Run the scheduled task
+while True:
+    schedule.run_pending()
+    time.sleep(1)
