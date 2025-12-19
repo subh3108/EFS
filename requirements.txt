@@ -2,6 +2,7 @@ jupyterlab
 pandas
 nbclient
 GoogleNews
+pygooglenews
 gnewsclient
 snscrape
 rake_nltk
