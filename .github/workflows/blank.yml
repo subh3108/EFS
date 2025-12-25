@@ -3,8 +3,8 @@ name: Jupyter
 on:
   workflow_dispatch:
   schedule:
-    # Run every day at 5:00 PM UTC
-    - cron: '17 10 * * *'
+    # Run every day at 10:00 PM UTC
+    - cron: '30 16 * * *'
  
 jobs:
   build:
